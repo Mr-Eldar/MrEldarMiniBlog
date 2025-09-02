@@ -26,7 +26,7 @@ export const NotesCard = () => {
    const limit = 8;
 
 	const checkPassword = (value: string) => {
-		if (value == "E02072010G") {
+		if (value === "E02072010G") {
 			setWritePassword(false);
 			setPassword('');
 		} else {

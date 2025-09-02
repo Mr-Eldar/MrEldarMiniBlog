@@ -26,7 +26,7 @@ export const NotesCard = () => {
    const limit = 8;
 
 	const checkPassword = (value: string) => {
-		if (value === process.env.REACT_APP_API_NOTESEE_PASSWORD) {
+		if (value == process.env.REACT_APP_API_NOTESEE_PASSWORD) {
 			setWritePassword(prev => !prev);
 			setPassword('');
 		} else {

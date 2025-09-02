@@ -37,7 +37,7 @@ export const formatText = (text: string) => {
 	// Картинки
 	html = html.replace(
 		/!\((.*?)\)\((.*?)\)/g,
-		'<img src="$2" alt="$1" class="w-full object-cover mx-auto rounded-lg my-4 border border-[var(--line-color)]"/>'
+		'<img loading="lazy" src="$2" alt="$1" class="w-full object-cover mx-auto rounded-lg my-4 border border-[var(--line-color)]"/>'
 	);
 
 	// Квадратики (badges)

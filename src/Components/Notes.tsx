@@ -27,7 +27,7 @@ export const NotesCard = () => {
 
 	const checkPassword = (value: string) => {
 		if (value == process.env.REACT_APP_API_NOTESEE_PASSWORD) {
-			setWritePassword(prev => !prev);
+			setWritePassword(false);
 			setPassword('');
 		} else {
 			alert('Пароль не верный.');
@@ -86,7 +86,7 @@ export const NotesCard = () => {
 						{skeleton}
 					</div>
 				) : (
-					!writePassword && (
+					writePassword === false && (
 						<FadeIn delay={100}>
 							<div className='grid grid-cols-2 gap-7 shadow-[var(--shadow)] max-[850px]:grid-cols-1 max-[850px]:gap-5'>
 								{notes.map(note => (

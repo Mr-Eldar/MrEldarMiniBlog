@@ -93,7 +93,7 @@ export const NotesCard = () => {
 									<Link to={`/note/${note.id}`}>
 										<div
 											key={note.id}
-											className='w-auto h-45 rounded-xl transition-[400ms,ease] bg-[var(--post-bg)] p-13 pt-7 hover:-translate-y-2 hover:shadow-xl max-md:whitespace-nowrap max-md:overflow-hidden max-md:text-ellipsis'
+											className='w-auto h-auto rounded-xl transition-[400ms,ease] bg-[var(--post-bg)] p-13 pt-7 hover:-translate-y-2 hover:shadow-xl max-md:whitespace-nowrap max-md:overflow-hidden max-md:text-ellipsis'
 										>
 											<h1 className='text-3xl font-bold text-[var(--color)]'>
 												{note.title}

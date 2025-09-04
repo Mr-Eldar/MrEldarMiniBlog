@@ -77,7 +77,6 @@ export const PostCard = () => {
 							>
 								<>
 									<img
-										loading='lazy'
 										className='w-[50%] object-cover rounded-tl-2xl rounded-bl-2xl max-md:rounded-bl-none max-md:rounded-tr-2xl max-md:w-full'
 										src={mainPost.imageUrl}
 										alt='Preview'

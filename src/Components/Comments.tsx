@@ -185,7 +185,7 @@ export const Comments = ({ postId }: Props) => {
 								>
 									<div className='flex items-center justify-between'>
 										<h3 className='font-semibold text-[18px] text-green-400'>
-											{comment.userName}
+											{comment.userName.length > 1 ? comment.userName : 'Аноним'}
 										</h3>
 										<CommentLikes
 											commentId={comment.postId}

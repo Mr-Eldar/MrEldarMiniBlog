@@ -24,8 +24,6 @@ export const CommentLikes = ({ likes, commentId }: Props) => {
 	const handleClick = async () => {
 		if (isLiking) return; // Не даем лайкать повторно
 
-		const currentLikes = commentLikes;
-		setCommentLikes(currentLikes + 1);
 		setIsLiking(true);
 
 		// Сохраняем в localStorage
@@ -36,11 +34,13 @@ export const CommentLikes = ({ likes, commentId }: Props) => {
 		localStorage.setItem('likedComments', JSON.stringify(likedComments));
 
 		try {
-			const updatedComment = await clickLike(commentId, currentLikes + 1);
+			// Отправляем текущее количество лайков (без +1)
+			const updatedComment = await clickLike(commentId, commentLikes);
+			
+			// Используем количество лайков, которое вернул сервер
 			setCommentLikes(updatedComment.likes);
 		} catch (error) {
 			console.error('Ошибка лайка:', error);
-			setCommentLikes(currentLikes);
 			setIsLiking(false);
 
 			// Удаляем из localStorage при ошибке

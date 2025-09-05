@@ -189,7 +189,6 @@ export const Comments = ({ postId }: Props) => {
 										</h3>
 										<CommentLikes
 											commentId={comment.postId}
-											isLiked={comment.isLiked}
 											likes={comment.likes}
 										/>
 									</div>

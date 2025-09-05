@@ -6,30 +6,51 @@ import clsx from 'clsx';
 
 type Props = {
    likes: number;
-   isLiked: boolean;
    commentId: number
 };
 
-export const CommentLikes = ({ likes, isLiked, commentId }: Props) => {
+export const CommentLikes = ({ likes, commentId }: Props) => {
    const [commentLikes, setCommentLikes] = React.useState<number>(likes);
-   const [isLiking, setIsLiking] = React.useState<boolean>(isLiked); 
+   const [isLiking, setIsLiking] = React.useState<boolean>(false);
 
-   const handleClick = async () => {
-      setIsLiking(true)
-      const currentLikes = commentLikes;
+	// Проверяем в localStorage, лайкал ли пользователь этот комментарий
+	React.useEffect(() => {
+		const likedComments = JSON.parse(
+			localStorage.getItem('likedComments') || '{}'
+		);
+		setIsLiking(!!likedComments[commentId]);
+	}, [commentId]);
 
-      setCommentLikes(currentLikes + 1);
+	const handleClick = async () => {
+		if (isLiking) return; // Не даем лайкать повторно
 
-      try {
-         const updatedComment = await clickLike(commentId, currentLikes, isLiking);
-         setCommentLikes(updatedComment.likes);
-         setIsLiking(true);
-      } catch (error) {
-         console.error('Ошибка лайка:', error);
-         setCommentLikes(currentLikes);
-         setIsLiking(false);
-      }
-   }
+		const currentLikes = commentLikes;
+		setCommentLikes(currentLikes + 1);
+		setIsLiking(true);
+
+		// Сохраняем в localStorage
+		const likedComments = JSON.parse(
+			localStorage.getItem('likedComments') || '{}'
+		);
+		likedComments[commentId] = true;
+		localStorage.setItem('likedComments', JSON.stringify(likedComments));
+
+		try {
+			const updatedComment = await clickLike(commentId, currentLikes + 1);
+			setCommentLikes(updatedComment.likes);
+		} catch (error) {
+			console.error('Ошибка лайка:', error);
+			setCommentLikes(currentLikes);
+			setIsLiking(false);
+
+			// Удаляем из localStorage при ошибке
+			const likedComments = JSON.parse(
+				localStorage.getItem('likedComments') || '{}'
+			);
+			delete likedComments[commentId];
+			localStorage.setItem('likedComments', JSON.stringify(likedComments));
+		}
+	};
 
 	return (
 		<>

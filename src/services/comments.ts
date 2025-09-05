@@ -15,12 +15,10 @@ export const createComment = async (comment: {}) => {
    return res.data
 }
 
-export const clickLike = async (commentId: number, currentLikes: number, isLiked: boolean) => {
+export const clickLike = async (commentId: number, currentLikes: number) => {
 	const res = await axios.put(
 		`https://68acc47fb996fea1c08ad7b2.mockapi.io/comments/${commentId}`,
-		{ likes: currentLikes + 1, 
-         isLiked: !isLiked,
-      }
+		{ likes: currentLikes + 1}
 	);
 	return res.data;
 }
